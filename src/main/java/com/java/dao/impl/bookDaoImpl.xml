@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.impl.bookDaoImpl">
+    <!--sql语句保存在Mybatis的局部配置文件中-->
+    <!--
+    insert标签：只能存放插入语句
+          ID属性：给标签取唯一的标识符
+          parameterType:指定参数类型.insert、delete、update、select都具有此属性
+          resultType：指定当前sql查询语句返回的数据类型。类型不是生气了语句的最终类型，而是某一条数据的类型
+    -->
+    <select id="selectBookId" parameterType="Map" resultType="Map">
+         select *from store where id=#{id}
+     </select>
+
+    <select id="selectBookIdByBean" parameterType="Map" resultType="store">
+         select *from store where id=#{id}
+    </select>
+
+    <!--
+    给参数指定自定义数据类型
+    -->
+    <select id="selectBookIdForBean" parameterType="store" resultType="store">
+         select *from store where id=#{id}
+    </select>
+
+    <!--查询所有-->
+    <select id="selectAll" resultType="Map">
+        select *from store
+    </select>
+
+    <!--查询所有-->
+    <select id="selectAll2" resultType="store">
+        select *from store
+    </select>
+
+    <!--模糊查询-->
+    <select id="selectLike" resultType="Map" parameterType="Map">
+        select *from store where name like CONCAT('%',#{keyWord},'%');
+    </select>
+
+    <!--动态查询-->
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select *from store
+        <where>
+            <if test="id!=null and id!='' ">
+               id=#{id}
+            </if>
+            <if test="name!=null and name!=''">
+                AND name=#{name}
+            </if>
+            <if test="price!=null and price=''">
+                AND price &gt;=${price}
+            </if>
+            <if test="size!=null and size=''">
+                AND size=#{size}
+            </if>
+        </where>
+    </select>
+
+</mapper>

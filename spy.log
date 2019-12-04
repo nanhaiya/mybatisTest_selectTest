@@ -1,0 +1,4 @@
+1575341990142|1|statement|connection 0|select *from store|select *from store
+1575348829293|2|statement|connection 0|select *from store where id=?|select *from store where id=1
+1575420914316|1|statement|connection 0|select *from store where name like CONCAT('%',?,'%');|select *from store where name like CONCAT('%',NULL,'%');
+1575420962602|1|statement|connection 0|select *from store|select *from store
